@@ -1,4 +1,4 @@
-const { Schema, Types } = require('mongoose');
+const { Schema, Types, model } = require('mongoose');
 
 const userSchema = new Schema( {
     username: {
@@ -15,11 +15,11 @@ const userSchema = new Schema( {
         /^([A-Za-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/
     },
     thoughts: {
-        type: Array,
+        type: Schema.Types.ObjectId,
         ref: "Thought"
     },
     friends: {
-        type: Array,
+        type: Schema.Types.ObjectId,
         ref: "User"
     }
 },  {
@@ -29,5 +29,18 @@ const userSchema = new Schema( {
                 return this.friends.length;
             }
         }
-    }
+    },    
+        toJSON: {
+            getters: true,
+        },
+        id: false,
+        versionKey: false
 });
+
+
+//Initialize our User model
+const User = model('User', userSchema);
+
+const handleError = (err) => console.error(err);
+
+module.exports = User;
