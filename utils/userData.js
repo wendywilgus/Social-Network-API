@@ -15,7 +15,7 @@ const userData = [
     }
 ];
 
-const seedUser = asyn () => {
+const seedUser = async () => {
     await User.deleteMany({});
     await User.insertMany(userData);
 };

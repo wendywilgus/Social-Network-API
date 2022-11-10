@@ -1,5 +1,5 @@
-const { Schema, model } = require('mongoose');
-const reactionSchema = require('./reaction');
+const { Schema, model, Types } = require('mongoose');
+const reaction = require('./reaction');
 
 const thoughtSchema = new Schema(
     {
@@ -35,7 +35,11 @@ const thoughtSchema = new Schema(
         id: false,
  });
 
-
+//get Total Friend Count
+thoughtSchema.virtual('reactionCount')
+    .get(function() {
+        return this.reactions.length;
+    })
 
 //Initialize our Thoughts model
 const Thoughts = model('Thoughts', thoughtSchema);

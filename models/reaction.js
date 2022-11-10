@@ -1,5 +1,5 @@
-const { Schema, Types } = require('mongoose');
-const { $where } = require('./thoughts');
+const { Schema, model, Types } = require('mongoose');
+const thoughts = require('./thoughts');
 
 const reactionSchema = new Schema({
     reactionId: {

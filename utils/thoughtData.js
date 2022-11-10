@@ -1,4 +1,4 @@
-const { Thought, Thoughts } = require('../models');
+const { Thoughts } = require('../models');
 
 const thoughtData =[
     {
