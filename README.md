@@ -47,9 +47,8 @@ This project was completed as part of Georgia Tech's Full Stack Development Boot
 
 ## Resources
 The following resources were helpful in researching best practices and problem-solving on the project.
-* [ExpressJs](https://expressjs.com/en/guide/routing.html)
-* [Routing](https://expressjs.com/en/guide/routing.html)
-* [Express.js](https://www.npmjs.com/package/express) 
-* [Mongoose](https://www.npmjs.com/package/mongoose)
+* [Mini-Css-Extract-PlugIn](https://www.npmjs.com/package/mini-css-extract-plugin)
+* [Webpack](https://www.npmjs.com/package/webpack)
+
 
 
