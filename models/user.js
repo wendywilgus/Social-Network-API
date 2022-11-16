@@ -14,37 +14,38 @@ const userSchema = new Schema( {
         match: 	
         /^([A-Za-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/
     },
-    thoughts: {
+    thought: {
         type: Schema.Types.ObjectId,
-        ref: "Thought"
+        ref: "thought"
     },
-    friends: {
+    friend: [{
         type: Schema.Types.ObjectId,
-        ref: "User"
-    }
+        ref: "user"
+    }]
 },  {
     virtuals: {
         friendCount: {
             get() {
-                return this.friends.length;
+                return this.friend.length;
             }
         }
     },    
         toJSON: {
             getters: true,
+            virtuals: true,
         },
         id: false,
-        versionKey: false
+    
 });
 
-userSchema.virtual("friendCount")
-    .get(function() {
-        return this.friends.length;
-    })
+// userSchema.virtual("friendCount")
+//     .get(function() {
+//         return this.friends.length;
+//     })
 
 //Initialize our User model
-const User = model('User', userSchema);
+const user = model('user', userSchema);
 
 const handleError = (err) => console.error(err);
 
-module.exports = User;
+module.exports = user;

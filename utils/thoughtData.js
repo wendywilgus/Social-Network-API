@@ -1,4 +1,4 @@
-const { Thoughts } = require('../models');
+const { thought } = require('../models');
 
 const thoughtData =[
     {
@@ -28,8 +28,8 @@ const thoughtData =[
 ];
 
 const seedThought = async () => {
-    await Thoughts.deleteMany({});
-    await Thoughts.insertMany(thoughtData);
+    await thought.deleteMany({});
+    await thought.insertMany(thoughtData);
 };
 
 module.exports = seedThought;

@@ -1,20 +1,21 @@
-const { Thought, User, Thoughts } = require('../models');
+const { thought, user } = require('../models');
 const reactionSchema = require('../models/reaction');
 const { ObjectId } = require('mongoose').Types;
 
 module.exports = {
     getAllThoughts: async (req, res) => {
         try{
-            const thoughtData = await Thoughts.find();
+            const thoughtData = await thought.find();
             res.status(200).json(thoughtData);
         } catch (err) {
             res.status(500).json(err);
+            console.log(err);
         }
     },
 
     getOneThought: async (req, res) => {
         try{
-            const thoughtData = await Thoughts.findById(req.params.id);
+            const thoughtData = await thought.findById(req.params.id);
 
             !thoughtData ?
             res.status(400).json("Thought not found.") :
@@ -26,9 +27,9 @@ module.exports = {
 
     createThought: async (req, res) => {
         try{
-            const user = await User.findOne({username: req.body.username});
-            const thoughtData = await Thoughts.create(req.body);
-            await User.findByIdAndUpdate(user._id, {$push: {thoughts: thoughtData._id}}, {new: true});
+            const user = await user.findOne({username: req.body.username});
+            const thoughtData = await thought.create(req.body);
+            await user.findByIdAndUpdate(user._id, {$push: {thought: thoughtData._id}}, {new: true});
             res.status(200).json(thoughtData);
         } catch (err) {
             res.status(500).json(err);
@@ -37,7 +38,7 @@ module.exports = {
 
     updateThought: async (req, res) => {
         try{
-            const thoughtData = await Thoughts.findByIdAndUpdate(req.params.id, {thoughtText: req.body.thoughtText}, {new: true});
+            const thoughtData = await thought.findByIdAndUpdate(req.params.id, {thoughtText: req.body.thoughtText}, {new: true});
             res.status(200).json(thoughtData);
         } catch (err) {
             res.status(500).json(err);
@@ -46,8 +47,8 @@ module.exports = {
 
     deleteThought: async (req, res) => {
         try{
-            const thoughtData = await Thoughts.findByIdAndDelete(req.params.id);
-            res.status(200).json(`${thoughtsData._id} has been deleted.`)
+            const thoughtData = await thought.findByIdAndDelete(req.params.id);
+            res.status(200).json(`${thoughtData._id} has been deleted.`)
         } catch (err) {
             res.status(500).json(err);
         }
@@ -61,7 +62,7 @@ module.exports = {
                 res.status(400).json("Error");
                 return;
             }
-            const newReaction = await Thoughts.findByIdAndUpdate(req.params.thoughtId, {$push: {reactions: {reactionBody, username}}}, {new: true});
+            const newReaction = await thought.findByIdAndUpdate(req.params.thoughtId, {$push: {reactions: {reactionBody, username}}}, {new: true});
         } catch (err) {
             res.status(500).json(err);
         }
@@ -74,7 +75,7 @@ module.exports = {
                 res.status(400).json("Error");
                 return;
             }
-            const updatedThought = await Thoughts.findByIdAndUpdate(req.params.thoughtId, {$pull: {reactions: {reactionId}}}, {new: true});
+            const updatedThought = await thought.findByIdAndUpdate(req.params.thoughtId, {$pull: {reactions: {reactionId}}}, {new: true});
             res.status(200).json(updatedThought);
 
         } catch (err) {
