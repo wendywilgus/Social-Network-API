@@ -37,7 +37,7 @@ THEN I am able to successfully create and delete reactions to thoughts and add a
 
 ## Mock Up
 
-Please view the linked video for a full demonstration of the functionality of this application.
+Please view the linked video for a full demonstration of the functionality of this application. https://drive.google.com/file/d/1wdD6Mxo50sB2QADnGQCLE5QG5e8pZrz4/view 
 
 ## License
 This project was completed as part of Georgia Tech's Full Stack Development Boot Camp course. 
